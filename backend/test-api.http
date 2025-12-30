@@ -1,0 +1,227 @@
+### SISTEMA FREELANCER - TESTES COMPLETOS (SEM PIX)
+
+### 1. Criar Freelancer
+POST http://localhost:3000/freelancers
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "chave_pix": "11999999999"
+}
+
+###
+
+### 2. Listar Freelancers
+GET http://localhost:3000/freelancers
+
+###
+
+### 3. Buscar Freelancer Específico
+GET http://localhost:3000/freelancers/1
+
+###
+
+### 4. Atualizar Freelancer
+POST http://localhost:3000/freelancers/1
+Content-Type: application/json
+
+{
+  "nome": "João Silva Santos"
+}
+
+###
+
+### 5. Criar Cliente
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+  "freelancer_id": 1,
+  "nome": "Cliente XYZ Ltda",
+  "email": "contato@xyz.com"
+}
+
+###
+
+### 6. Listar Clientes
+GET http://localhost:3000/clientes
+
+###
+
+### 7. Buscar Cliente Específico
+GET http://localhost:3000/clientes/1
+
+###
+
+### 8. Atualizar Cliente
+POST http://localhost:3000/clientes/1
+Content-Type: application/json
+
+{
+  "nome": "Cliente XYZ Empresa"
+}
+
+###
+
+### 9. Criar Projeto
+POST http://localhost:3000/projetos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "nome": "Website Corporativo",
+  "valor": 5000.00,
+  "status": "em_andamento"
+}
+
+###
+
+### 10. Listar Projetos
+GET http://localhost:3000/projetos
+
+###
+
+### 11. Buscar Projeto Específico
+GET http://localhost:3000/projetos/1
+
+###
+
+### 12. Atualizar Projeto
+POST http://localhost:3000/projetos/1
+Content-Type: application/json
+
+{
+  "status": "concluido"
+}
+
+###
+
+### 13. Criar Atividade
+POST http://localhost:3000/atividades
+Content-Type: application/json
+
+{
+  "projeto_id": 1,
+  "nome": "Desenvolvimento Frontend",
+  "status": "em_andamento",
+  "tempo_estimado": 40
+}
+
+###
+
+### 14. Listar Atividades
+GET http://localhost:3000/atividades
+
+###
+
+### 15. Buscar Atividade Específica
+GET http://localhost:3000/atividades/1
+
+###
+
+### 16. Atualizar Atividade
+POST http://localhost:3000/atividades/1
+Content-Type: application/json
+
+{
+  "status": "concluida"
+}
+
+###
+
+### 17. Iniciar Hora (Timer)
+POST http://localhost:3000/horas
+Content-Type: application/json
+
+{
+  "atividade_id": 1,
+  "freelancer_id": 1
+}
+
+###
+
+### 18. Listar Horas Ativas
+GET http://localhost:3000/horas/ativas
+
+###
+
+### 19. Parar Hora (Timer)
+POST http://localhost:3000/horas/1/parar
+
+###
+
+### 20. Listar Todas as Horas
+GET http://localhost:3000/horas
+
+###
+
+### 21. Buscar Hora Específica
+GET http://localhost:3000/horas/1
+
+###
+
+### 22. Criar Pagamento
+POST http://localhost:3000/pagamentos
+Content-Type: application/json
+
+{
+  "projeto_id": 1,
+  "valor": 1000.00
+}
+
+###
+
+### 23. Listar Pagamentos
+GET http://localhost:3000/pagamentos
+
+###
+
+### 24. Buscar Pagamento Específico
+GET http://localhost:3000/pagamentos/1
+
+###
+
+### 25. Atualizar Status do Pagamento
+POST http://localhost:3000/pagamentos/1/status
+Content-Type: application/json
+
+{
+  "status": "pago"
+}
+
+###
+
+### ============================================
+### LIMPEZA (DELETE) - Use com cuidado!
+### ============================================
+
+### Deletar Pagamento
+DELETE http://localhost:3000/pagamentos/1
+
+###
+
+### Deletar Hora
+DELETE http://localhost:3000/horas/1
+
+###
+
+### Deletar Atividade
+DELETE http://localhost:3000/atividades/1
+
+###
+
+### Deletar Projeto
+DELETE http://localhost:3000/projetos/1
+
+###
+
+### Deletar Cliente
+DELETE http://localhost:3000/clientes/1
+
+###
+
+### Deletar Freelancer
+DELETE http://localhost:3000/freelancers/1
+
+###

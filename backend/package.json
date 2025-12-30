@@ -1,0 +1,32 @@
+{
+  "name": "freelancer-backend-modular",
+  "version": "3.0.0",
+  "description": "Sistema de Gestão de Serviços Freelancers - Modular (Sem PIX)",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
+    "build": "tsc",
+    "prod": "node dist/main.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-socket.io": "^10.0.0",
+    "@nestjs/typeorm": "^10.0.0",
+    "@nestjs/websockets": "^10.0.0",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.1",
+    "pg": "^8.11.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1",
+    "socket.io": "^4.6.0",
+    "typeorm": "^0.3.17"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.0"
+  }
+}
