@@ -21,6 +21,15 @@ export class Pagamento {
   @Column({ type: 'varchar', length: 20, default: 'pendente' })
   status!: string;
 
+  @Column({ type: 'text', nullable: true })
+  qr_code!: string;
+
+  @Column({ type: 'text', nullable: true })
+  qr_code_base64!: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  transaction_id!: string;
+
   @CreateDateColumn()
   createdAt!: Date;
 }

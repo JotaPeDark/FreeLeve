@@ -4,15 +4,22 @@ import { Repository } from 'typeorm';
 import { Pagamento } from './pagamento.entity';
 import { Projeto } from '../projetos/projeto.entity';
 import { CreatePagamentoDto, UpdatePagamentoStatusDto } from './pagamento.dto';
+import { MercadoPagoConfig, Payment } from 'mercadopago';
 
 @Injectable()
 export class PagamentoService {
+  private mpClient: MercadoPagoConfig;
+
   constructor(
     @InjectRepository(Pagamento)
     private readonly repository: Repository<Pagamento>,
     @InjectRepository(Projeto)
     private readonly projetoRepo: Repository<Projeto>,
-  ) {}
+  ) {
+    this.mpClient = new MercadoPagoConfig({ 
+      accessToken: process.env.MP_ACCESS_TOKEN || '' 
+    });
+  }
 
   async findAll(): Promise<Pagamento[]> {
     return this.repository.find();
@@ -27,22 +34,44 @@ export class PagamentoService {
   }
 
   async create(dto: CreatePagamentoDto): Promise<Pagamento> {
-    // Verificar se o projeto existe
     const projeto = await this.projetoRepo.findOne({ 
-      where: { id: dto.projeto_id }
+      where: { id: dto.projeto_id },
+      relations: ['cliente']
     });
     
     if (!projeto) {
       throw new BadRequestException(`Projeto ${dto.projeto_id} não encontrado`);
     }
 
-    const pagamento = this.repository.create({
-      projeto_id: dto.projeto_id,
-      valor: dto.valor,
-      status: 'pendente',
-    });
+    // Criar pagamento no Mercado Pago
+    const payment = new Payment(this.mpClient);
+    
+    try {
+      const mpResponse = await payment.create({
+        body: {
+          transaction_amount: Number(dto.valor),
+          description: `Pagamento Projeto: ${projeto.nome}`,
+          payment_method_id: 'pix',
+          payer: {
+            email: projeto.cliente?.email || 'cliente@email.com',
+          },
+        }
+      });
 
-    return this.repository.save(pagamento);
+      const pagamento = this.repository.create({
+        projeto_id: dto.projeto_id,
+        valor: dto.valor,
+        status: 'pendente',
+        transaction_id: mpResponse.id?.toString(),
+        qr_code: mpResponse.point_of_interaction?.transaction_data?.qr_code,
+        qr_code_base64: mpResponse.point_of_interaction?.transaction_data?.qr_code_base64,
+      });
+
+      return this.repository.save(pagamento);
+    } catch (error: any) {
+      console.error('Erro Mercado Pago:', error);
+      throw new BadRequestException('Erro ao gerar PIX no Mercado Pago');
+    }
   }
 
   async updateStatus(id: number, dto: UpdatePagamentoStatusDto): Promise<Pagamento> {

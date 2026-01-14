@@ -36,30 +36,11 @@ export class HoraGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage('iniciarHora')
   async handleIniciarHora(@MessageBody() data: { atividade_id: number; freelancer_id: number }) {
     try {
-      if (!data.atividade_id || typeof data.atividade_id !== 'number') {
-        return { success: false, error: 'atividade_id inválido' };
-      }
-
-      if (!data.freelancer_id || typeof data.freelancer_id !== 'number') {
-        return { success: false, error: 'freelancer_id inválido' };
-      }
-
       const hora = await this.horaService.create(data);
-
-      this.server.emit('horaUpdate', {
-        hora_id: hora.id,
-        atividade_id: hora.atividade_id,
-        freelancer_id: hora.freelancer_id,
-        status: 'iniciado',
-        inicio: hora.inicio,
-      });
-
-      this.logger.log(`Hora iniciada: ID ${hora.id} - Atividade ${data.atividade_id}, Freelancer ${data.freelancer_id}`);
-
+      this.server.emit('horaUpdate', { ...hora, status: 'iniciado' });
       return { success: true, hora };
     } catch (error: any) {
-      this.logger.error(`Erro ao iniciar hora: ${error.message}`);
-      return { success: false, error: error.message || 'Erro ao iniciar hora' };
+      return { success: false, error: error.message };
     }
   }
 
