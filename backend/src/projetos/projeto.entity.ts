@@ -1,7 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, Index, CreateDateColumn, JoinColumn } from 'typeorm';
 import { Cliente } from '../clientes/cliente.entity';
 import { Atividade } from '../atividades/atividade.entity';
-import { Pagamento } from '../pagamentos/pagamento.entity';
 
 @Entity('projetos')
 @Index(['cliente_id'])
@@ -28,9 +27,6 @@ export class Projeto {
 
   @OneToMany(() => Atividade, atividade => atividade.projeto)
   atividades!: Atividade[];
-
-  @OneToMany(() => Pagamento, pagamento => pagamento.projeto)
-  pagamentos!: Pagamento[];
 
   @CreateDateColumn()
   createdAt!: Date;
