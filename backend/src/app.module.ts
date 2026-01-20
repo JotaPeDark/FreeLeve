@@ -5,7 +5,6 @@ import { ClienteModule } from './clientes/cliente.module';
 import { ProjetoModule } from './projetos/projeto.module';
 import { AtividadeModule } from './atividades/atividade.module';
 import { HoraModule } from './horas/hora.module';
-import { PagamentoModule } from './pagamentos/pagamento.module';
 
 @Module({
   imports: [
