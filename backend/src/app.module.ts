@@ -21,7 +21,6 @@ import { HoraModule } from './horas/hora.module';
     ProjetoModule,
     AtividadeModule,
     HoraModule,
-    PagamentoModule,
   ],
 })
 export class AppModule {}
