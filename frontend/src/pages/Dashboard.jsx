@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { freelancerAPI, clienteAPI, projetoAPI, pagamentoAPI } from '../services/api';
+import { freelancerAPI, clienteAPI, projetoAPI } from '../services/api';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
     freelancers: 0,
     clientes: 0,
     projetos: 0,
-    pagamentos: 0,
     loading: true
   });
 
@@ -16,18 +15,16 @@ const Dashboard = () => {
 
   const loadStats = async () => {
     try {
-      const [freelancers, clientes, projetos, pagamentos] = await Promise.all([
+      const [freelancers, clientes, projetos] = await Promise.all([
         freelancerAPI.getAll(),
         clienteAPI.getAll(),
         projetoAPI.getAll(),
-        pagamentoAPI.getAll()
       ]);
 
       setStats({
         freelancers: freelancers.data.length,
         clientes: clientes.data.length,
         projetos: projetos.data.length,
-        pagamentos: pagamentos.data.length,
         loading: false
       });
     } catch (error) {
