@@ -65,15 +65,4 @@ export const horaAPI = {
   delete: (id) => api.delete(`/horas/${id}`)
 };
 
-// ============================================
-// PAGAMENTOS
-// ============================================
-export const pagamentoAPI = {
-  getAll: () => api.get('/pagamentos'),
-  getById: (id) => api.get(`/pagamentos/${id}`),
-  create: (data) => api.post('/pagamentos', data),
-  updateStatus: (id, status) => api.post(`/pagamentos/${id}/status`, { status }),
-  delete: (id) => api.delete(`/pagamentos/${id}`)
-};
-
 export default api;
