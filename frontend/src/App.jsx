@@ -7,7 +7,6 @@ import Clientes from './pages/Clientes';
 import Projetos from './pages/Projetos';
 import Atividades from './pages/Atividades';
 import Timer from './pages/Timer';
-import Pagamentos from './pages/Pagamentos';
 import './styles/global.css';
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
             <Route path="/projetos" element={<Projetos />} />
             <Route path="/atividades" element={<Atividades />} />
             <Route path="/horas" element={<Timer />} />
-            <Route path="/pagamentos" element={<Pagamentos />} />
           </Routes>
         </main>
       </div>
