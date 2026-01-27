@@ -1,68 +1,68 @@
 import axios from 'axios'; 
- 
+
 const api = axios.create({ 
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000', 
   headers: { 
     'Content-Type': 'application/json' 
   } 
 }); 
- 
+
 // ============================================ 
 // FREELANCERS 
 // ============================================ 
 export const freelancerAPI = { 
-  getAll: () => api.get('/api/freelancers'), 
-  getById: (id) => api.get(`/api/freelancers/${id}`), 
-  create: (data) => api.post('/api/freelancers', data), 
-  update: (id, data) => api.put(`/api/freelancers/${id}`, data), 
-  delete: (id) => api.delete(`/api/freelancers/${id}`), 
-  getClientes: (id) => api.get(`/api/freelancers/${id}/clientes`) 
+  getAll: () => api.get('/freelancers'), 
+  getById: (id) => api.get(/freelancers/${id}), 
+  create: (data) => api.post('/freelancers', data), 
+  update: (id, data) => api.put(/freelancers/${id}, data), 
+  delete: (id) => api.delete(/freelancers/${id}), 
+  getClientes: (id) => api.get(/freelancers/${id}/clientes) 
 }; 
- 
+
 // ============================================ 
 // CLIENTES 
 // ============================================ 
 export const clienteAPI = { 
-  getAll: () => api.get('/api/clientes'), 
-  getById: (id) => api.get(`/api/clientes/${id}`), 
-  create: (data) => api.post('/api/clientes', data), 
-  update: (id, data) => api.put(`/api/clientes/${id}`, data), 
-  delete: (id) => api.delete(`/api/clientes/${id}`) 
+  getAll: () => api.get('/clientes'), 
+  getById: (id) => api.get(/clientes/${id}), 
+  create: (data) => api.post('/clientes', data), 
+  update: (id, data) => api.put(/clientes/${id}, data), 
+  delete: (id) => api.delete(/clientes/${id}) 
 }; 
- 
+
 // ============================================ 
 // PROJETOS 
 // ============================================ 
 export const projetoAPI = { 
-  getAll: () => api.get('/api/projetos'), 
-  getById: (id) => api.get(`/api/projetos/${id}`), 
-  create: (data) => api.post('/api/projetos', data), 
-  update: (id, data) => api.put(`/api/projetos/${id}`, data), 
-  delete: (id) => api.delete(`/api/projetos/${id}`), 
-  getAtividades: (id) => api.get(`/api/projetos/${id}/atividades`) 
+  getAll: () => api.get('/projetos'), 
+  getById: (id) => api.get(/projetos/${id}), 
+  create: (data) => api.post('/projetos', data), 
+  update: (id, data) => api.put(/projetos/${id}, data), 
+  delete: (id) => api.delete(/projetos/${id}), 
+  getAtividades: (id) => api.get(/projetos/${id}/atividades) 
 }; 
- 
+
 // ============================================ 
 // ATIVIDADES 
 // ============================================ 
 export const atividadeAPI = { 
-  getAll: () => api.get('/api/atividades'), 
-  getById: (id) => api.get(`/api/atividades/${id}`), 
-  create: (data) => api.post('/api/atividades', data), 
-  update: (id, data) => api.put(`/api/atividades/${id}`, data), 
-  delete: (id) => api.delete(`/api/atividades/${id}`) 
+  getAll: () => api.get('/atividades'), 
+  getById: (id) => api.get(/atividades/${id}), 
+  create: (data) => api.post('/atividades', data), 
+  update: (id, data) => api.put(/atividades/${id}, data), 
+  delete: (id) => api.delete(/atividades/${id}) 
 }; 
- 
+
 // ============================================ 
 // HORAS 
 // ============================================ 
 export const horaAPI = { 
-  getAll: () => api.get('/api/horas'), 
-  getById: (id) => api.get(`/api/horas/${id}`), 
-  getAtivas: () => api.get('/api/horas/ativas'), 
-  iniciar: (data) => api.post('/api/horas', data), 
-  parar: (id) => api.post(`/api/horas/${id}/parar`), 
-  delete: (id) => api.delete(`/api/horas/${id}`) 
+  getAll: () => api.get('/horas'), 
+  getById: (id) => api.get(/horas/${id}), 
+  getAtivas: () => api.get('/horas/ativas'), 
+  iniciar: (data) => api.put('/horas', data), 
+  parar: (id) => api.post(/horas/${id}/parar), 
+  delete: (id) => api.delete(/horas/${id}) 
 }; 
- 
+
 export default api;
