@@ -18,7 +18,7 @@ async function bootstrap() {
   
   // CORS
   app.enableCors({
-    origin: '*',
+    origin: 'https://freeleve-front.onrender.com',
     credentials: true,
   });
   
